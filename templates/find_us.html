@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Find Us - Healthy Squeeze{% endblock %}
+
+{% block extra_head %}
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold text-success mb-3">Find Our Store</h1>
+            <p class="lead text-muted">Visit us in the heart of Kibera, Nairobi</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Store Information -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-store me-2"></i>Store Information
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5 class="text-primary">
+                            <i class="fas fa-map-marker-alt me-2"></i>Address
+                        </h5>
+                        <p class="text-muted">
+                            Healthy Squeeze Store<br>
+                            Kibera Drive, Section 7<br>
+                            Kibera, Nairobi, Kenya
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="text-primary">
+                            <i class="fas fa-clock me-2"></i>Opening Hours
+                        </h5>
+                        <ul class="list-unstyled text-muted">
+                            <li><strong>Monday - Friday:</strong> 8:00 AM - 7:00 PM</li>
+                            <li><strong>Saturday:</strong> 8:00 AM - 8:00 PM</li>
+                            <li><strong>Sunday:</strong> 9:00 AM - 6:00 PM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="text-primary">
+                            <i class="fas fa-phone me-2"></i>Contact
+                        </h5>
+                        <p class="text-muted">
+                            <strong>Phone:</strong> +254 123 456 789<br>
+                            <strong>WhatsApp:</strong> +254 123 456 789<br>
+                            <strong>Email:</strong> info@healthysqueeze.co.ke
+                        </p>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary" onclick="getDirections()">
+                            <i class="fas fa-directions me-2"></i>Get Directions
+                        </button>
+                        <button type="button" class="btn btn-outline-success" onclick="callStore()">
+                            <i class="fas fa-phone me-2"></i>Call Store
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-map me-2"></i>Location Map
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How to Find Us -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="fas fa-route me-2"></i>How to Find Us
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center">
+                                <i class="fas fa-bus fa-3x text-primary mb-3"></i>
+                                <h5>By Matatu</h5>
+                                <p class="text-muted">Take a matatu to Kibera and ask for Healthy Squeeze store near Section 7. Most locals know our location!</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center">
+                                <i class="fas fa-walking fa-3x text-success mb-3"></i>
+                                <h5>Landmarks</h5>
+                                <p class="text-muted">We're located near the Kibera community center, close to the main market area. Look for our green signboard!</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center">
+                                <i class="fas fa-mobile-alt fa-3x text-warning mb-3"></i>
+                                <h5>Need Help?</h5>
+                                <p class="text-muted">Call or WhatsApp us at +254 123 456 789 and we'll guide you to our store. We're always happy to help!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    let map;
+    let userMarker;
+    let storeMarker;
+    
+    // Store location (Kibera, Nairobi)
+    const storeLocation = {
+        lat: -1.3133,
+        lng: 36.7864
+    };
+    
+    function initMap() {
+        // Initialize map centered on store location
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: storeLocation,
+            styles: [
+                {
+                    "featureType": "poi",
+                    "elementType": "labels",
+                    "stylers": [{"visibility": "on"}]
+                }
+            ]
+        });
+        
+        // Add store marker
+        storeMarker = new google.maps.Marker({
+            position: storeLocation,
+            map: map,
+            title: 'Healthy Squeeze Store',
+            icon: {
+                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#28a745">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                `),
+                scaledSize: new google.maps.Size(40, 40)
+            }
+        });
+        
+        // Info window for store
+        const infoWindow = new google.maps.InfoWindow({
+            content: `
+                <div style="padding: 10px;">
+                    <h5 style="color: #28a745; margin-bottom: 10px;">
+                        <i class="fas fa-store"></i> Healthy Squeeze
+                    </h5>
+                    <p style="margin: 5px 0;"><strong>Address:</strong> Kibera Drive, Section 7</p>
+                    <p style="margin: 5px 0;"><strong>Phone:</strong> +254 123 456 789</p>
+                    <p style="margin: 5px 0;"><strong>Hours:</strong> 8AM - 7PM (Mon-Fri)</p>
+                </div>
+            `
+        });
+        
+        storeMarker.addListener('click', () => {
+            infoWindow.open(map, storeMarker);
+        });
+        
+        // Show info window by default
+        infoWindow.open(map, storeMarker);
+        
+        // Try to get user's location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    
+                    // Add user marker
+                    userMarker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: 'Your Location',
+                        icon: {
+                            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#007bff">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <circle cx="12" cy="12" r="6" fill="white"/>
+                                    <circle cx="12" cy="12" r="3" fill="#007bff"/>
+                                </svg>
+                            `),
+                            scaledSize: new google.maps.Size(30, 30)
+                        }
+                    });
+                    
+                    // Adjust map to show both locations
+                    const bounds = new google.maps.LatLngBounds();
+                    bounds.extend(userLocation);
+                    bounds.extend(storeLocation);
+                    map.fitBounds(bounds);
+                },
+                (error) => {
+                    console.log('Geolocation error:', error.message);
+                }
+            );
+        }
+    }
+    
+    function getDirections() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    const directionsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${storeLocation.lat},${storeLocation.lng}`;
+                    window.open(directionsUrl, '_blank');
+                },
+                (error) => {
+                    // Fallback: open Google Maps with store location
+                    const directionsUrl = `https://www.google.com/maps/dir//${storeLocation.lat},${storeLocation.lng}`;
+                    window.open(directionsUrl, '_blank');
+                }
+            );
+        } else {
+            // Fallback: open Google Maps with store location
+            const directionsUrl = `https://www.google.com/maps/dir//${storeLocation.lat},${storeLocation.lng}`;
+            window.open(directionsUrl, '_blank');
+        }
+    }
+    
+    function callStore() {
+        window.location.href = 'tel:+254123456789';
+    }
+    
+    // Initialize map when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Use a simple iframe map as fallback since Google Maps API requires key
+        const mapContainer = document.getElementById('map');
+        mapContainer.innerHTML = `
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6916308587773!2d36.78384241475394!3d-1.3133000990737958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a6b7a8b5555%3A0x1234567890abcdef!2sKibera%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1642000000000!5m2!1sen!2ske"
+                width="100%" 
+                height="400" 
+                style="border:0; border-radius: 10px;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        `;
+    });
+</script>
+{% endblock %}
