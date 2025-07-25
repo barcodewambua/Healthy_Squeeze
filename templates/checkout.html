@@ -11,7 +11,7 @@
             </h1>
         </div>
     </div>
-    
+
     <div class="row">
         <!-- Checkout Form -->
         <div class="col-lg-8">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Delivery Address -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-warning text-dark">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Payment Method -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-success text-white">
@@ -77,16 +77,34 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" 
                                            id="mpesa" value="mpesa" checked>
                                     <label class="form-check-label" for="mpesa">
-                                        <i class="fas fa-mobile-alt text-success me-2"></i>M-Pesa
+                                        <i class="fas fa-mobile-alt text-success me-2"></i>M-Pesa STK Push
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" 
+                                           id="till" value="till">
+                                    <label class="form-check-label" for="till">
+                                        <i class="fas fa-store text-success me-2"></i>M-Pesa Till
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" 
+                                           id="paybill" value="paybill">
+                                    <label class="form-check-label" for="paybill">
+                                        <i class="fas fa-university text-success me-2"></i>M-Pesa Paybill
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" 
                                            id="cash" value="cash">
@@ -96,12 +114,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle me-2"></i>
                             <strong>Note:</strong> This is a demo checkout. No actual payment will be processed.
                         </div>
-                        
+
                         <!-- M-Pesa STK Push Modal -->
                         <div class="modal fade" id="stkPushModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -120,7 +138,7 @@
                                             <h6>Initiating Payment...</h6>
                                             <p class="text-muted">Please wait while we process your request</p>
                                         </div>
-                                        
+
                                         <div id="stkStep2" class="stk-step d-none">
                                             <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
                                             <h6>Check Your Phone</h6>
@@ -133,7 +151,7 @@
                                             </div>
                                             <small class="text-muted">Waiting for payment confirmation...</small>
                                         </div>
-                                        
+
                                         <div id="stkStep3" class="stk-step d-none">
                                             <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
                                             <h6>Payment Successful!</h6>
@@ -142,7 +160,7 @@
                                                 <br>You will receive an SMS confirmation shortly
                                             </p>
                                         </div>
-                                        
+
                                         <div id="stkStep4" class="stk-step d-none">
                                             <i class="fas fa-times-circle fa-3x text-danger mb-3"></i>
                                             <h6>Payment Failed</h6>
@@ -159,15 +177,153 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- M-Pesa Till Instructions Modal -->
+                        <div class="modal fade" id="tillModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success text-white">
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-store me-2"></i>M-Pesa Till Payment
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center mb-4">
+                                            <i class="fas fa-mobile-alt fa-3x text-success"></i>
+                                        </div>
+
+                                        <h6 class="text-center mb-4">Follow these steps to complete payment:</h6>
+
+                                        <ol class="list-group list-group-numbered">
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Go to your M-Pesa</div>
+                                                    Open M-Pesa on your phone
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Select Lipa na M-Pesa</div>
+                                                    Choose payment option
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Select Buy Goods and Services</div>
+                                                    Choose this payment method
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Till Number</div>
+                                                    <span class="badge bg-success fs-6">123456</span> then press OK
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Amount</div>
+                                                    <span class="badge bg-primary fs-6">KES <span id="tillAmount"></span></span> then press OK
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Pin</div>
+                                                    Enter your M-Pesa PIN then press OK
+                                                </div>
+                                            </li>
+                                        </ol>
+
+                                        <div class="alert alert-info mt-3">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Note:</strong> After payment, click "I've Paid" to complete your order.
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success" id="tillPaidBtn">I've Paid</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- M-Pesa Paybill Instructions Modal -->
+                        <div class="modal fade" id="paybillModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success text-white">
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-university me-2"></i>M-Pesa Paybill Payment
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center mb-4">
+                                            <i class="fas fa-mobile-alt fa-3x text-success"></i>
+                                        </div>
+
+                                        <h6 class="text-center mb-4">Follow these steps to complete payment:</h6>
+
+                                        <ol class="list-group list-group-numbered">
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Go to your M-Pesa</div>
+                                                    Open M-Pesa on your phone
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Select Lipa na M-Pesa</div>
+                                                    Choose payment option
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Select Paybill</div>
+                                                    Choose this payment method
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Business Number</div>
+                                                    <span class="badge bg-success fs-6">123456</span> then press OK
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Amount</div>
+                                                    <span class="badge bg-primary fs-6">KES <span id="paybillAmount"></span></span> then press OK
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Enter Pin</div>
+                                                    Enter your M-Pesa PIN then press OK
+                                                </div>
+                                            </li>
+                                        </ol>
+
+                                        <div class="alert alert-info mt-3">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Note:</strong> After payment, click "I've Paid" to complete your order.
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success" id="paybillPaidBtn">I've Paid</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
                 <button type="button" class="btn btn-success btn-lg w-100" id="placeOrderBtn">
                     <i class="fas fa-check me-2"></i>Place Order
                 </button>
             </form>
         </div>
-        
+
         <!-- Order Summary -->
         <div class="col-lg-4">
             <div class="card shadow-sm sticky-top">
@@ -187,26 +343,26 @@
                         <small class="fw-bold">{{ item.product.currency }} {{ item.item_total }}</small>
                     </div>
                     {% endfor %}
-                    
+
                     <hr>
-                    
+
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal:</span>
                         <span class="fw-bold">KES {{ total }}</span>
                     </div>
-                    
+
                     <div class="d-flex justify-content-between mb-3">
                         <span>Delivery:</span>
                         <span class="text-success">Free</span>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="d-flex justify-content-between mb-3">
                         <span class="h5">Total:</span>
                         <span class="h5 text-primary">KES {{ total }}</span>
                     </div>
-                    
+
                     <div class="alert alert-success">
                         <i class="fas fa-truck me-2"></i>
                         <small>Free delivery within Nairobi</small>
@@ -221,40 +377,49 @@
 document.addEventListener('DOMContentLoaded', function() {
     const placeOrderBtn = document.getElementById('placeOrderBtn');
     const stkPushModal = new bootstrap.Modal(document.getElementById('stkPushModal'));
+    const tillModal = new bootstrap.Modal(document.getElementById('tillModal'));
+    const paybillModal = new bootstrap.Modal(document.getElementById('paybillModal'));
     const checkoutForm = document.querySelector('form');
     let paymentSuccessful = false;
-    
+
     placeOrderBtn.addEventListener('click', function() {
         const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
         const phoneInput = document.getElementById('phone');
-        
+
         // Validate required fields
         if (!validateForm()) {
             return;
         }
-        
+
         if (paymentMethod === 'mpesa') {
             // Show STK push modal for M-Pesa
             showStkPushProcess(phoneInput.value);
-        } else {
+        } else if (paymentMethod === 'till') {
+            // Show Till modal
+            showTillProcess();
+        } else if (paymentMethod === 'paybill') {
+            // Show Paybill modal
+            showPaybillProcess();
+        }
+        else {
             // For cash on delivery, submit form directly
             checkoutForm.submit();
         }
     });
-    
+
     function validateForm() {
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const address = document.getElementById('address').value.trim();
-        
+
         if (!name || !phone || !address) {
             alert('Please fill in all required fields!');
             return false;
         }
-        
+
         return true;
     }
-    
+
     function showStkPushProcess(phoneNumber) {
         // Reset modal state
         document.querySelectorAll('.stk-step').forEach(step => step.classList.add('d-none'));
@@ -262,58 +427,68 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('continueBtn').classList.add('d-none');
         document.getElementById('modalCloseBtn').textContent = 'Close';
         paymentSuccessful = false;
-        
+
         stkPushModal.show();
-        
+
         // Step 1: Initiating payment (2 seconds)
         setTimeout(() => {
             document.getElementById('stkStep1').classList.add('d-none');
             document.getElementById('stkStep2').classList.remove('d-none');
             document.getElementById('phoneDisplay').textContent = phoneNumber;
-            
+
             // Start progress bar animation
             animateProgressBar();
-            
+
             // Step 2: Waiting for user input (8 seconds)
             setTimeout(() => {
                 // Randomly succeed or fail (90% success rate)
                 const success = Math.random() > 0.1;
-                
+
                 if (success) {
                     showPaymentSuccess();
                 } else {
                     showPaymentFailure();
                 }
             }, 8000);
-            
+
         }, 2000);
     }
-    
+
+    function showTillProcess() {
+        document.getElementById('tillAmount').textContent = '{{ total }}'; // Set the total amount
+        tillModal.show();
+    }
+
+    function showPaybillProcess() {
+        document.getElementById('paybillAmount').textContent = '{{ total }}'; // Set the total amount
+        paybillModal.show();
+    }
+
     function animateProgressBar() {
         const progressBar = document.querySelector('#stkStep2 .progress-bar');
         let width = 0;
         const interval = setInterval(() => {
             width += 2;
             progressBar.style.width = width + '%';
-            
+
             if (width >= 100) {
                 clearInterval(interval);
             }
         }, 160); // 8 seconds total (8000ms / 50 steps)
     }
-    
+
     function showPaymentSuccess() {
         document.getElementById('stkStep2').classList.add('d-none');
         document.getElementById('stkStep3').classList.remove('d-none');
-        
+
         // Generate random transaction ID
         const transactionId = 'MPX' + Math.random().toString(36).substr(2, 9).toUpperCase();
         document.getElementById('transactionId').textContent = transactionId;
-        
+
         document.getElementById('continueBtn').classList.remove('d-none');
         document.getElementById('modalCloseBtn').textContent = 'Cancel';
         paymentSuccessful = true;
-        
+
         // Auto-continue after 3 seconds
         setTimeout(() => {
             if (paymentSuccessful) {
@@ -321,23 +496,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 3000);
     }
-    
+
     function showPaymentFailure() {
         document.getElementById('stkStep2').classList.add('d-none');
         document.getElementById('stkStep4').classList.remove('d-none');
         document.getElementById('modalCloseBtn').textContent = 'Try Again';
         paymentSuccessful = false;
     }
-    
+
     function proceedWithOrder() {
         stkPushModal.hide();
         // Submit the form after successful payment
         checkoutForm.submit();
     }
-    
+
     // Continue button click handler
     document.getElementById('continueBtn').addEventListener('click', proceedWithOrder);
-    
+
     // Modal close button handler
     document.getElementById('modalCloseBtn').addEventListener('click', function() {
         if (this.textContent === 'Try Again') {
@@ -350,6 +525,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // For other cases, just close modal
             stkPushModal.hide();
         }
+    });
+
+    // Till Paid button handler
+    document.getElementById('tillPaidBtn').addEventListener('click', function() {
+        tillModal.hide();
+        checkoutForm.submit(); // Submit the form after till payment
+    });
+
+     // Paybill Paid button handler
+     document.getElementById('paybillPaidBtn').addEventListener('click', function() {
+        paybillModal.hide();
+        checkoutForm.submit(); // Submit the form after paybill payment
     });
 });
 </script>
