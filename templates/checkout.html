@@ -101,10 +101,68 @@
                             <i class="fas fa-info-circle me-2"></i>
                             <strong>Note:</strong> This is a demo checkout. No actual payment will be processed.
                         </div>
+                        
+                        <!-- M-Pesa STK Push Modal -->
+                        <div class="modal fade" id="stkPushModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success text-white">
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-mobile-alt me-2"></i>M-Pesa Payment
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div id="stkStep1" class="stk-step">
+                                            <div class="spinner-border text-success mb-3" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <h6>Initiating Payment...</h6>
+                                            <p class="text-muted">Please wait while we process your request</p>
+                                        </div>
+                                        
+                                        <div id="stkStep2" class="stk-step d-none">
+                                            <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
+                                            <h6>Check Your Phone</h6>
+                                            <p class="text-muted">
+                                                An STK push has been sent to <span id="phoneDisplay"></span>
+                                                <br>Enter your M-Pesa PIN to complete payment
+                                            </p>
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-success" style="width: 0%"></div>
+                                            </div>
+                                            <small class="text-muted">Waiting for payment confirmation...</small>
+                                        </div>
+                                        
+                                        <div id="stkStep3" class="stk-step d-none">
+                                            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                                            <h6>Payment Successful!</h6>
+                                            <p class="text-muted">
+                                                Transaction ID: <strong id="transactionId"></strong>
+                                                <br>You will receive an SMS confirmation shortly
+                                            </p>
+                                        </div>
+                                        
+                                        <div id="stkStep4" class="stk-step d-none">
+                                            <i class="fas fa-times-circle fa-3x text-danger mb-3"></i>
+                                            <h6>Payment Failed</h6>
+                                            <p class="text-muted">
+                                                Transaction was cancelled or timed out.
+                                                <br>Please try again.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalCloseBtn">Close</button>
+                                        <button type="button" class="btn btn-success d-none" id="continueBtn">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-success btn-lg w-100">
+                <button type="button" class="btn btn-success btn-lg w-100" id="placeOrderBtn">
                     <i class="fas fa-check me-2"></i>Place Order
                 </button>
             </form>
@@ -158,4 +216,141 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const placeOrderBtn = document.getElementById('placeOrderBtn');
+    const stkPushModal = new bootstrap.Modal(document.getElementById('stkPushModal'));
+    const checkoutForm = document.querySelector('form');
+    let paymentSuccessful = false;
+    
+    placeOrderBtn.addEventListener('click', function() {
+        const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        const phoneInput = document.getElementById('phone');
+        
+        // Validate required fields
+        if (!validateForm()) {
+            return;
+        }
+        
+        if (paymentMethod === 'mpesa') {
+            // Show STK push modal for M-Pesa
+            showStkPushProcess(phoneInput.value);
+        } else {
+            // For cash on delivery, submit form directly
+            checkoutForm.submit();
+        }
+    });
+    
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        
+        if (!name || !phone || !address) {
+            alert('Please fill in all required fields!');
+            return false;
+        }
+        
+        return true;
+    }
+    
+    function showStkPushProcess(phoneNumber) {
+        // Reset modal state
+        document.querySelectorAll('.stk-step').forEach(step => step.classList.add('d-none'));
+        document.getElementById('stkStep1').classList.remove('d-none');
+        document.getElementById('continueBtn').classList.add('d-none');
+        document.getElementById('modalCloseBtn').textContent = 'Close';
+        paymentSuccessful = false;
+        
+        stkPushModal.show();
+        
+        // Step 1: Initiating payment (2 seconds)
+        setTimeout(() => {
+            document.getElementById('stkStep1').classList.add('d-none');
+            document.getElementById('stkStep2').classList.remove('d-none');
+            document.getElementById('phoneDisplay').textContent = phoneNumber;
+            
+            // Start progress bar animation
+            animateProgressBar();
+            
+            // Step 2: Waiting for user input (8 seconds)
+            setTimeout(() => {
+                // Randomly succeed or fail (90% success rate)
+                const success = Math.random() > 0.1;
+                
+                if (success) {
+                    showPaymentSuccess();
+                } else {
+                    showPaymentFailure();
+                }
+            }, 8000);
+            
+        }, 2000);
+    }
+    
+    function animateProgressBar() {
+        const progressBar = document.querySelector('#stkStep2 .progress-bar');
+        let width = 0;
+        const interval = setInterval(() => {
+            width += 2;
+            progressBar.style.width = width + '%';
+            
+            if (width >= 100) {
+                clearInterval(interval);
+            }
+        }, 160); // 8 seconds total (8000ms / 50 steps)
+    }
+    
+    function showPaymentSuccess() {
+        document.getElementById('stkStep2').classList.add('d-none');
+        document.getElementById('stkStep3').classList.remove('d-none');
+        
+        // Generate random transaction ID
+        const transactionId = 'MPX' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        document.getElementById('transactionId').textContent = transactionId;
+        
+        document.getElementById('continueBtn').classList.remove('d-none');
+        document.getElementById('modalCloseBtn').textContent = 'Cancel';
+        paymentSuccessful = true;
+        
+        // Auto-continue after 3 seconds
+        setTimeout(() => {
+            if (paymentSuccessful) {
+                proceedWithOrder();
+            }
+        }, 3000);
+    }
+    
+    function showPaymentFailure() {
+        document.getElementById('stkStep2').classList.add('d-none');
+        document.getElementById('stkStep4').classList.remove('d-none');
+        document.getElementById('modalCloseBtn').textContent = 'Try Again';
+        paymentSuccessful = false;
+    }
+    
+    function proceedWithOrder() {
+        stkPushModal.hide();
+        // Submit the form after successful payment
+        checkoutForm.submit();
+    }
+    
+    // Continue button click handler
+    document.getElementById('continueBtn').addEventListener('click', proceedWithOrder);
+    
+    // Modal close button handler
+    document.getElementById('modalCloseBtn').addEventListener('click', function() {
+        if (this.textContent === 'Try Again') {
+            // For failed payments, hide modal and let user try again
+            stkPushModal.hide();
+        } else if (paymentSuccessful) {
+            // For successful payments, proceed with order
+            proceedWithOrder();
+        } else {
+            // For other cases, just close modal
+            stkPushModal.hide();
+        }
+    });
+});
+</script>
 {% endblock %}
