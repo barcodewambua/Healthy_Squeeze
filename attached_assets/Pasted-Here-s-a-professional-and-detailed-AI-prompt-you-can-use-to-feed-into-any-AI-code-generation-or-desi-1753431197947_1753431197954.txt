@@ -1,0 +1,45 @@
+Here's a professional and detailed AI prompt you can use to feed into any AI code-generation or design model (e.g., Copilot, CodeWhisperer, Gemini, ChatGPT Code Interpreter, or an auto web builder):
+________________________________________
+✅ Prompt for AI Code Generator:
+Build a colorful, user-friendly e-commerce prototype called “Healthy Squeeze” using Python (Flask), HTML, CSS, JavaScript, and Bootstrap.
+Project Description:
+“Healthy Squeeze” is an e-commerce web platform selling herbal remedies and fresh medicinal juice. The platform is based in Kibera slums, Nairobi, and aims to provide healthy, affordable, and natural alternatives to the local community.
+Core Functional Requirements:
+1.	Product Categorization:
+o	Two main product categories:
+	Dawapaste – A herbal paste made of ginger, tamarind, and honey.
+	Fresh Juice – Blended natural juices (passion fruit, pineapple, green juice) with no preservatives.
+2.	Product Details & Benefits (View Product Page):
+o	For each item, include:
+	Image
+	Ingredients
+	Medicinal Benefits
+o	For example:
+	Dawapaste:
+	Ginger: Antioxidant, aids constipation & bloating.
+	Tamarind: High potassium, helps blood pressure, detoxifies.
+	Honey: Supports respiratory health, helps with cold & asthma.
+	Fresh Juice:
+	Passion: Vitamin A – supports skin, vision, immunity.
+	Pineapple: High in fiber – aids digestion.
+	Green Juice: Promotes digestion & weight loss.
+3.	Frontend Features:
+o	Colorful, modern UI/UX (inspired by natural and organic health brands).
+o	Product listing page with:
+	Add to cart
+	View product (with modal or dedicated page)
+	Buy Now (mock purchase)
+o	Simple mock payment flow (simulate checkout with dummy form and success message).
+o	“Find Us” page or button with geolocation support:
+	Show directions/map to a physical shop in Kibera, Nairobi using HTML5 Geolocation or a Google Maps embed.
+4.	Tech Stack:
+o	Flask (Python backend for routing and mock logic)
+o	HTML + CSS + Bootstrap for layout
+o	JavaScript for cart interactivity and geolocation
+o	Jinja2 templating for dynamic pages
+5.	Bonus (Optional but Preferred):
+o	Mobile responsive layout.
+o	Highlight local, natural and affordable branding in styling.
+o	Use dummy images or placeholders for products.
+o	Add a readme file that contains all the run and configuration process
+
