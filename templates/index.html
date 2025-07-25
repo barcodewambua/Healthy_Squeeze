@@ -23,7 +23,8 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="https://pixabay.com/get/ga28c2a6d3d125c851074c741ac1f2d0c40cf56889cc0dbeadebbd1d1300426a1cdf51cc3e6570d0175b03f6a75f19e17619d65822f976639311f80fb70ad724c_1280.jpg" 
+                <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" 
+                     onerror="this.src='https://pixabay.com/get/ga28c2a6d3d125c851074c741ac1f2d0c40cf56889cc0dbeadebbd1d1300426a1cdf51cc3e6570d0175b03f6a75f19e17619d65822f976639311f80fb70ad724c_1280.jpg'"
                      alt="Local Community Market" class="img-fluid rounded-3 shadow-lg">
             </div>
         </div>
