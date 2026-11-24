@@ -321,7 +321,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-success btn-lg w-100" id="placeOrderBtn">
+                <button type="submit" class="btn btn-success btn-lg w-100" id="placeOrderBtn">
                     <i class="fas fa-check me-2"></i>Place Order
                 </button>
             </form>
@@ -385,29 +385,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutForm = document.querySelector('form');
     let paymentSuccessful = false;
 
-    placeOrderBtn.addEventListener('click', function() {
+    checkoutForm.addEventListener('submit', function(e) {
         const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
         const phoneInput = document.getElementById('phone');
 
         // Validate required fields
         if (!validateForm()) {
+            e.preventDefault();
             return;
         }
 
         if (paymentMethod === 'mpesa') {
+            e.preventDefault();
             // Show STK push modal for M-Pesa
             showStkPushProcess(phoneInput.value);
         } else if (paymentMethod === 'till') {
+            e.preventDefault();
             // Show Till modal
             showTillProcess();
         } else if (paymentMethod === 'paybill') {
+            e.preventDefault();
             // Show Paybill modal
             showPaybillProcess();
         }
-        else {
-            // For cash on delivery, submit form directly
-            checkoutForm.submit();
-        }
+        // For cash on delivery, let the form submit naturally
     });
 
     function validateForm() {

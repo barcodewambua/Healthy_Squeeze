@@ -18,8 +18,8 @@ Healthy Squeeze is a community-based e-commerce platform that provides natural, 
 - Product listing with category filtering
 - Detailed product pages with ingredients and medicinal benefits
 - Shopping cart with quantity management (add, update, remove)
-- Mock checkout with payment options (M-Pesa, Cash on Delivery)
-- Store locator with HTML5 Geolocation support for the Kibera location
+- Checkout with M-Pesa payment flows (STK Push, Till, Paybill) and Cash on Delivery
+- Store locator with HTML5 Geolocation and embedded Google Maps
 - Mobile-responsive design
 
 ### Highlights
@@ -27,7 +27,7 @@ Healthy Squeeze is a community-based e-commerce platform that provides natural, 
 - **Natural & Organic Design** — Earth-tone color palette reflecting natural ingredients
 - **Community Focus** — Local, affordable branding tailored for Kibera
 - **Health Benefits** — Detailed medicinal properties for every product
-- **Geolocation** — "Find Us" page with embedded Google Maps and distance calculation
+- **Geolocation** — "Find Us" page with distance calculation and directions
 - **Responsive** — Mobile-first layout using Bootstrap 5
 
 ## Tech Stack
@@ -38,7 +38,6 @@ Healthy Squeeze is a community-based e-commerce platform that provides natural, 
 |-----------|---------|
 | **Flask 3.1** | Web framework — routing, request handling, template rendering |
 | **Flask-Session** | Server-side session storage for shopping cart persistence |
-| **Flask-SQLAlchemy** | ORM layer (available for future database integration) |
 | **Jinja2** | Template engine for dynamic HTML |
 
 ### Frontend
@@ -47,38 +46,42 @@ Healthy Squeeze is a community-based e-commerce platform that provides natural, 
 |-----------|---------|
 | **HTML5 / CSS3** | Semantic markup, CSS Grid & Flexbox layouts |
 | **Bootstrap 5** | Responsive grid, components, and utilities |
-| **JavaScript (Vanilla)** | Cart interactions, geolocation, and UI behavior |
-| **Font Awesome** | Icon set for navigation and UI elements |
+| **JavaScript (Vanilla)** | Cart interactions, geolocation, payment modals |
+| **Font Awesome 6** | Icon set for navigation and UI elements |
 | **Google Fonts (Poppins)** | Modern typography |
 
 ### External Services
 
 - **Google Maps Embed API** — Store location map on the "Find Us" page
-- **Pixabay** — Stock product imagery
 
 ## Project Structure
 
 ```
 WebForge/
-├── app.py                 # Flask app factory & configuration
-├── main.py                # Entry point — runs the dev server
-├── models.py              # Product data & helper functions
-├── routes.py              # All route handlers (pages, cart, checkout)
-├── requirements.txt       # Pinned Python dependencies
-├── pyproject.toml         # Project metadata
+├── app.py                  # Flask app factory & configuration
+├── main.py                 # Entry point — runs the dev server on port 5000
+├── models.py               # Product data & helper functions
+├── routes.py               # All route handlers (pages, cart, checkout)
+├── requirements.txt        # Pinned Python dependencies
+├── pyproject.toml          # Project metadata
 ├── templates/
-│   ├── base.html          # Base layout (navbar, footer, flash messages)
-│   ├── index.html         # Home page with featured products
-│   ├── products.html      # Product listing with category filter
-│   ├── product_detail.html# Single product view
-│   ├── cart.html           # Shopping cart
-│   ├── checkout.html       # Checkout form
-│   └── find_us.html        # Store locator with map
+│   ├── base.html           # Base layout (navbar, footer, flash messages)
+│   ├── index.html          # Home page with featured products
+│   ├── products.html       # Product listing with category filter
+│   ├── product_detail.html # Single product view
+│   ├── cart.html            # Shopping cart
+│   ├── checkout.html        # Checkout form with M-Pesa payment modals
+│   └── find_us.html         # Store locator with map
 ├── static/
-│   ├── css/style.css       # Custom styles
-│   ├── js/main.js          # Client-side JavaScript
-│   └── images/             # Product and branding images
-└── flask_session/          # Server-side session files (auto-generated)
+│   ├── css/style.css        # Custom styles
+│   ├── js/main.js           # Client-side JavaScript
+│   └── images/              # Product images
+│       ├── dawapaste.jpg
+│       ├── gingerpaste.png
+│       ├── greentea.jpg
+│       ├── juice.jpg
+│       └── pineaple.png
+└── flask_session/           # Server-side session files (auto-generated)
 ```
 
 ## Installation & Setup

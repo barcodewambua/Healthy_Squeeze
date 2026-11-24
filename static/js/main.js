@@ -89,22 +89,10 @@ function initializeCart() {
 
 // Update cart display
 function updateCartDisplay() {
-    const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
-        // Get cart count from session (this would typically be done server-side)
-        fetch('/api/cart/count')
-            .then(response => response.json())
-            .then(data => {
-                cartCount.textContent = data.count;
-                if (data.count > 0) {
-                    cartCount.style.display = 'inline';
-                } else {
-                    cartCount.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.log('Cart count update failed:', error);
-            });
+    // Cart count is rendered server-side via context processor, no AJAX needed
+    const cartBadge = document.querySelector('.badge.rounded-pill.bg-success');
+    if (cartBadge) {
+        cartBadge.style.display = 'inline';
     }
 }
 

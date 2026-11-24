@@ -7,7 +7,7 @@ PRODUCTS = {
         'category': 'Herbal Remedies',
         'price': 500,  # KES
         'currency': 'KES',
-        'image': 'static\images\dawapaste.jpg',
+        'image': '/static/images/dawapaste.jpg',
         'description': 'Traditional herbal paste made from natural ingredients including ginger, tamarind, and honey.',
         'ingredients': {
             'Ginger': 'Antioxidant properties, aids in treating constipation and bloating',
@@ -28,7 +28,7 @@ PRODUCTS = {
         'category': 'Fresh Juices',
         'price': 150,  # KES
         'currency': 'KES',
-        'image': '\static\images\juice.jpg',
+        'image': '/static/images/juice.jpg',
         'description': 'Pure passion fruit juice with no preservatives, rich in Vitamin A and natural antioxidants.',
         'ingredients': {
             'Passion Fruit': 'High in Vitamin A - supports healthy skin, vision, and immune system'
@@ -47,7 +47,7 @@ PRODUCTS = {
         'category': 'Fresh Juices',
         'price': 120,  # KES
         'currency': 'KES',
-        'image': '\static\images/pineaple.png',
+        'image': '/static/images/pineaple.png',
         'description': 'Fresh pineapple juice high in fiber and natural enzymes to aid digestion.',
         'ingredients': {
             'Pineapple': 'High in fiber and digestive enzymes - aids digestion and supports gut health'
@@ -66,7 +66,7 @@ PRODUCTS = {
         'category': 'Fresh Juices',
         'price': 200,  # KES
         'currency': 'KES',
-        'image': 'https://pixabay.com/get/g8a9e6301a5e97775fb6d4410a35bc6df657a8ca62beeba67678641383b86a961b9421cc8ee4f11495dc47ce86d5a5fd5b093377eed9b6742f24d76fa70314127_1280.jpg',
+        'image': '/static/images/greentea.jpg',
         'description': 'Blend of green vegetables and fruits that promotes digestion and supports weight management.',
         'ingredients': {
             'Green Vegetables Mix': 'Promotes healthy digestion and supports natural weight management'
@@ -85,7 +85,7 @@ PRODUCTS = {
         'category': 'Herbal Remedies',
         'price': 450,  # KES
         'currency': 'KES',
-        'image': '\static\images/gingerpaste.png',
+        'image': '/static/images/gingerpaste.png',
         'description': 'Traditional turmeric-based paste with anti-inflammatory and healing properties.',
         'ingredients': {
             'Turmeric': 'Powerful anti-inflammatory and antioxidant properties',
@@ -106,7 +106,7 @@ PRODUCTS = {
         'category': 'Fresh Juices',
         'price': 180,  # KES
         'currency': 'KES',
-        'image': '\static\images/greentea.jpg',
+        'image': '/static/images/greentea.jpg',
         'description': 'Nutrient-rich moringa leaf juice packed with vitamins, minerals, and antioxidants.',
         'ingredients': {
             'Moringa Leaves': 'Rich in vitamins A, C, and E, iron, calcium, and protein'
@@ -121,15 +121,18 @@ PRODUCTS = {
     }
 }
 
+
 def get_products_by_category(category=None):
     """Get products filtered by category"""
     if category:
         return {k: v for k, v in PRODUCTS.items() if v['category'] == category}
     return PRODUCTS
 
+
 def get_product(product_id):
     """Get a single product by ID"""
     return PRODUCTS.get(product_id)
+
 
 def get_categories():
     """Get all unique categories"""
