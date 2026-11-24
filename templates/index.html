@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold text-success mb-4">
-                    Natural Health from <span class="text-primary">Kibera</span>
+                 <span class="text-primary">healthy</span> lifestyle
                 </h1>
                 <p class="lead text-muted mb-4">
                     Discover the power of traditional herbal remedies and fresh, preservative-free juices. 
@@ -24,47 +24,15 @@
             </div>
             <div class="col-lg-6 text-center">
                 <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" 
-                     onerror="this.src='https://pixabay.com/get/ga28c2a6d3d125c851074c741ac1f2d0c40cf56889cc0dbeadebbd1d1300426a1cdf51cc3e6570d0175b03f6a75f19e17619d65822f976639311f80fb70ad724c_1280.jpg'"
-                     alt="Local Community Market" class="img-fluid rounded-3 shadow-lg">
+                     onerror="this.src='static/images/admin.jpg' "
+                     alt="Local Community Market" class="img-fluid rounded-3 shadow-lg"
+                     width="450px" height="200px">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="feature-card h-100 p-4">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-leaf fa-3x text-success"></i>
-                    </div>
-                    <h4 class="h5 mb-3">100% Natural</h4>
-                    <p class="text-muted">All our products are made from natural ingredients with no artificial preservatives or chemicals.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="feature-card h-100 p-4">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-heart fa-3x text-danger"></i>
-                    </div>
-                    <h4 class="h5 mb-3">Community Made</h4>
-                    <p class="text-muted">Proudly crafted in Kibera by local artisans using traditional methods passed down through generations.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="feature-card h-100 p-4">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-coins fa-3x text-warning"></i>
-                    </div>
-                    <h4 class="h5 mb-3">Affordable</h4>
-                    <p class="text-muted">Quality healthcare should be accessible to everyone. We keep our prices fair and reasonable.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Featured Herbal Remedies -->
 <section class="py-5">
@@ -139,6 +107,41 @@
             <a href="{{ url_for('products', category='Fresh Juices') }}" class="btn btn-primary btn-lg">
                 View All Fresh Juices <i class="fas fa-arrow-right ms-2"></i>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card h-100 p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-leaf fa-3x text-success"></i>
+                    </div>
+                    <h4 class="h5 mb-3">100% Natural</h4>
+                    <p class="text-muted">All our products are made from natural ingredients with no artificial preservatives or chemicals.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card h-100 p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-heart fa-3x text-danger"></i>
+                    </div>
+                    <h4 class="h5 mb-3">Community Made</h4>
+                    <p class="text-muted">Proudly crafted in Kibera by local artisans using traditional methods passed down through generations.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card h-100 p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-coins fa-3x text-warning"></i>
+                    </div>
+                    <h4 class="h5 mb-3">Affordable</h4>
+                    <p class="text-muted">Quality healthcare should be accessible to everyone. We keep our prices fair and reasonable.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
